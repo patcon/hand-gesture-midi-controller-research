@@ -20,4 +20,6 @@ Please favour:
 - tweets in this doc: https://docs.google.com/document/d/1vE60mXheYi223IWKxCPBhkVvElrPq1aWeoSuucTwZlU/edit?tab=t.0
 - projects are also in the above doc. Make sure we include and projects we process, and link back to them. The doc might update, and I'd like you to notice.
 - I'd like this project to be used by others, whether because we build it as library, or because it's a standalone utility (ideally both)
+- favour investigating approaches that use mediapipe library
+- ALSO: favour work from users with a lot of followers, or other highly-starred packages on github. People who are more trusted to operate socially on github have projects that are more interesting to learn from.
 
