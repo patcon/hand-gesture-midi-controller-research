@@ -38,12 +38,27 @@ Projects sourced from the [tracking doc](https://docs.google.com/document/d/1vE6
 | gl-2 | [to7m_midi_handler](gl-02-to7m-midi-handler.md) | 0 | Python | — | Low — MIDI routing middleware, not gesture input |
 | gl-3 | [salvagrid](gl-03-salvagrid.md) | 1 | WebGL/JS | — | Medium — physical object grid controller via webcam; distinct paradigm, live demo |
 
+## Additional GitHub Projects
+
+| # | Project | Stars | Language | Owner Followers | Priority |
+|---|---------|-------|----------|-----------------|----------|
+| 24 | [Handmate-MIDI](24-handmate-midi.md) | 58 (+9 offline) | JavaScript | 28 | **High** — most-starred JS project; WebMidi.js, MaxMSP patch, online+offline variants |
+| 25 | [leap-osc-to-midi](25-leap-osc-to-midi.md) | 17 | config | 131 | Medium — OSC-as-middleware pattern; Leap Motion only |
+| 26 | [HandPiano](26-handpiano.md) | 3 | Python | 18 | Low — sparse docs, nothing distinctive |
+| 27 | [facewave](27-facewave.md) | 3 | JavaScript | 501 | **High** — highest social trust in batch; face + hand → MIDI CC, live demo |
+| 28 | [MIDIDance](28-mididance.md) | 2 | Processing | 51 | Low — 2013, historical interest only |
+| 29 | [handi](29-handi.md) | 2 | Python | 491 | **High** — very high social trust; clean MediaPipe+mido package, good architecture to read |
+| 30 | [midiapipe-hand](30-midiapipe-hand.md) | 0 | JavaScript | 18 | Low — no description, old |
+| 31 | [Handmate-VocalLooper](31-handmate-vocallooper.md) | 0 | HTML | 0 | Low-Medium — most recently updated (Mar 13); gesture vocal looper, extends Handmate |
+| 32 | [Orchesture](32-orchesture.md) | 0 | Python | 1 | Medium — conducting metaphor, asymmetric dual-hand, KNN classifier, musical modifier gestures |
+
 ## Key Patterns Observed
 
 **MIDI output approaches:**
 - `pygame.midi` — simple, no virtual port needed, but limited DAW routing
 - `mido` + IAC Driver (macOS) / loopMIDI (Windows) — flexible, routes to any DAW
 - `python-rtmidi` — creates a named virtual MIDI device natively (ejfox's approach); no driver setup needed
+- `WebMidi.js` (webmidijs.org) — actively maintained Web MIDI wrapper; used by Handmate-MIDI (58 stars), more polished than JZZ.js
 - `JZZ.js` (Web MIDI API) — browser-native, no driver needed in Chrome/Edge
 - AU/VST3 plugin — most DAW-integrated, highest friction to build (motion2midi)
 
@@ -61,6 +76,9 @@ Projects sourced from the [tracking doc](https://docs.google.com/document/d/1vE6
 - Solfege hand signs via ML classifier (solfege.ai)
 - Asymmetric dual-hand: left = chords/toggles, right = CC (Hands-To-Midi)
 - Full-body pose landmarks (SynesthesIA, midi-mediapipe)
+- Face + hand combined (facewave) — unique; expands vocabulary to head tilt, eye/mouth openness
+- Conducting metaphor: broad arm movements → melody + harmony (Orchesture) — distinct UX framing
+- KNN classifier over landmarks (Orchesture) — lighter-weight than TF, fast to train at runtime
 
 **Notable findings:**
 - **MPE support**: Only dirigento-cinquecento supports MIDI Polyphonic Expression — a significant gap in other projects
@@ -68,6 +86,9 @@ Projects sourced from the [tracking doc](https://docs.google.com/document/d/1vE6
 - **Two projects not relevant**: PianoHands.jl and MIDI2HANDS operate on MIDI files, not gesture input
 - **Rhythm-Snap**: Follow-up to Hands-Free by the same author — worth adding to tracking doc
 - **ejfox/hand-midi-controller**: Now the benchmark for open-source completeness; `python-rtmidi` virtual device is the cleanest MIDI output pattern found
+- **Asymmetric dual-hand (left=harmony, right=melody)** convergently designed by Hands-To-Midi (#15) and Orchesture (#32) independently — strong signal for this as the natural mapping
+- **facewave + handi**: Two projects with 490+ follower owners but near-zero stars — worth reading despite low community signal
+- **Handmate ecosystem**: monlim's Handmate-MIDI (58★) is being forked (Handmate-VocalLooper) — suggests active community building on it
 
 ## Recommended Starting Stack
 
