@@ -51,6 +51,14 @@ Projects sourced from the [tracking doc](https://docs.google.com/document/d/1vE6
 | 30 | [midiapipe-hand](30-midiapipe-hand.md) | 0 | JavaScript | 18 | Low — no description, old |
 | 31 | [Handmate-VocalLooper](31-handmate-vocallooper.md) | 0 | HTML | 0 | Low-Medium — most recently updated (Mar 13); gesture vocal looper, extends Handmate |
 | 32 | [Orchesture](32-orchesture.md) | 0 | Python | 1 | Medium — conducting metaphor, asymmetric dual-hand, KNN classifier, musical modifier gestures |
+| 33 | [ether](33-ether.md) | 0 | JavaScript | 19 | **High** — best instrument design spec; Tone.js (no MIDI), scale quantization, both-hands-raised=reverb |
+| 34 | [xpadlab](34-xpadlab.md) | 0 | HTML | 0 | Low — software MIDI pad, no gesture tracking |
+| 35 | [cntrl](35-cntrl.md) | 0 | Python | 1 | **High** — most flexible mapping UI; any landmark×gesture×CC# configurable, JSON persistence |
+| 36 | [cam-fader](36-cam-fader.md) | 0 | Python | 2 | Low — single-purpose fader, covered by other projects |
+| 37 | [midi-event-handler](37-midi-event-handler.md) | 0 | Python | 0 | Low — MIDI middleware, not gesture input |
+| 38 | [Pynch-Synth](38-pynch-synth.md) | 1 | Python | 0 | Medium — ring+thumb pinch, wiggle→vibrato, Raspberry Pi support, slice mode |
+| 39 | [hand-gesture-midi (gyfooya)](39-hand-gesture-midi-gyfooya.md) | 0 | JavaScript | 0 | Low — single primitive: pinch distance→CC |
+| 40 | [midi-controller (amelie-schepping)](40-midi-controller-amelie.md) | 0 | Python | 0 | Low — no detail available |
 
 ## Key Patterns Observed
 
@@ -89,6 +97,10 @@ Projects sourced from the [tracking doc](https://docs.google.com/document/d/1vE6
 - **Asymmetric dual-hand (left=harmony, right=melody)** convergently designed by Hands-To-Midi (#15) and Orchesture (#32) independently — strong signal for this as the natural mapping
 - **facewave + handi**: Two projects with 490+ follower owners but near-zero stars — worth reading despite low community signal
 - **Handmate ecosystem**: monlim's Handmate-MIDI (58★) is being forked (Handmate-VocalLooper) — suggests active community building on it
+- **ether**: Best UX/instrument design spec found; scale quantization + Tone.js synthesis in-browser; "both hands raised = reverb" is a creative two-hand relative parameter
+- **cntrl**: Only project with a fully configurable landmark→CC mapping UI — any of 21 landmarks × gesture type × CC# — saved to JSON; the right abstraction for a "programmable" controller
+- **Pynch-Synth**: Ring+thumb pinch (not index+thumb), wiggle→vibrato, Raspberry Pi support — worth reading for these distinctive primitives
+- **Two non-gesture projects in this batch**: xpadlab (software MIDI pad) and midi-event-handler (MIDI routing) — not relevant
 
 ## Recommended Starting Stack
 
