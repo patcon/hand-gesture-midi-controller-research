@@ -18,6 +18,7 @@ import subprocess
 import sys
 import time
 import argparse
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -35,20 +36,22 @@ def gh_token() -> str:
     return token
 
 
-def fetch_source_repo_stats(username: str, token: str) -> tuple[int, int]:
-    """Return (source_repo_count, total_stars) for a GitHub user/org."""
+def fetch_source_repo_stats(username: str, token: str) -> dict | None:
+    """Return stats dict for a GitHub user/org, or None if not found."""
     headers = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
     source_count = 0
     total_stars = 0
+    most_recent_push = None
+    one_year_ago = datetime.now(timezone.utc).replace(year=datetime.now().year - 1)
+    repos_active_last_year = 0
     page = 1
 
     while True:
-        # Try user endpoint first, fall back to org endpoint
         url = f"https://api.github.com/users/{username}/repos"
         resp = requests.get(url, headers=headers, params={"per_page": 100, "page": page, "type": "owner"})
 
         if resp.status_code == 404:
-            return None, None
+            return None
 
         resp.raise_for_status()
         repos = resp.json()
@@ -61,12 +64,25 @@ def fetch_source_repo_stats(username: str, token: str) -> tuple[int, int]:
                 source_count += 1
                 total_stars += repo["stargazers_count"]
 
+                pushed_at = repo.get("pushed_at")
+                if pushed_at:
+                    pushed_dt = datetime.fromisoformat(pushed_at.replace("Z", "+00:00"))
+                    if most_recent_push is None or pushed_dt > most_recent_push:
+                        most_recent_push = pushed_dt
+                    if pushed_dt >= one_year_ago:
+                        repos_active_last_year += 1
+
         if len(repos) < 100:
             break
         page += 1
         time.sleep(0.1)  # stay well under rate limits
 
-    return source_count, total_stars
+    return {
+        "source_repo_count": source_count,
+        "source_repo_stars": total_stars,
+        "most_recent_push": most_recent_push.date().isoformat() if most_recent_push else "",
+        "repos_active_last_year": repos_active_last_year,
+    }
 
 
 def main():
@@ -84,7 +100,7 @@ def main():
         rows = list(reader)
 
     # Add new columns if not present
-    new_fields = ["source_repo_count", "source_repo_stars"]
+    new_fields = ["source_repo_count", "source_repo_stars", "most_recent_push", "repos_active_last_year"]
     for field in new_fields:
         if field not in fieldnames:
             fieldnames = fieldnames + [field]
@@ -99,24 +115,23 @@ def main():
             continue
 
         if platform != "github":
-            row.setdefault("source_repo_count", "")
-            row.setdefault("source_repo_stars", "")
+            for field in new_fields:
+                row.setdefault(field, "")
             continue
 
         # Skip if already populated and not in explicit user filter
-        if not filter_users and row.get("source_repo_count") and row.get("source_repo_stars"):
+        if not filter_users and row.get("most_recent_push") and row.get("repos_active_last_year"):
             continue
 
-        count, stars = fetch_source_repo_stats(username, token)
+        stats = fetch_source_repo_stats(username, token)
 
-        if count is None:
+        if stats is None:
             tqdm.write(f"  {username}: not found")
-            row["source_repo_count"] = ""
-            row["source_repo_stars"] = ""
+            for field in new_fields:
+                row[field] = ""
         else:
-            tqdm.write(f"  {username}: {count} source repos, {stars} total stars")
-            row["source_repo_count"] = count
-            row["source_repo_stars"] = stars
+            tqdm.write(f"  {username}: {stats['source_repo_count']} source repos, {stats['source_repo_stars']} stars, last push {stats['most_recent_push']}, {stats['repos_active_last_year']} active last year")
+            row.update(stats)
 
     if args.dry_run:
         writer = csv.DictWriter(sys.stdout, fieldnames=fieldnames)
