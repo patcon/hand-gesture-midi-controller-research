@@ -15,6 +15,10 @@ The goal is to build something that can be used by others — ideally as both a 
 
 See [`research/`](research/) for notes on 40+ gesture-to-MIDI projects across GitHub and GitLab, including analysis of stacks, gesture vocabularies, MIDI output patterns, and architectural recommendations.
 
+Browsable data:
+- [projects.csv](https://nakamura196.github.io/csv_viewer/?u=https%3A%2F%2Fraw.githubusercontent.com%2Fpatcon%2Fhand-gesture-midi-controller-research%2Frefs%2Fheads%2Fmain%2Fprojects.csv)
+- [people.csv](https://nakamura196.github.io/csv_viewer/?u=https%3A%2F%2Fraw.githubusercontent.com%2Fpatcon%2Fhand-gesture-midi-controller-research%2Frefs%2Fheads%2Fmain%2Fpeople.csv)
+
 ## Languages
 
 Primary interest in Python, TypeScript/JS, and Rust.
