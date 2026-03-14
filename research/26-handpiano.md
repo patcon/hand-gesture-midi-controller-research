@@ -8,10 +8,10 @@
 
 ## What It Is
 
-A simple Python MIDI piano controlled by finger gestures using OpenCV. Sparse documentation.
+A simple Python MIDI piano controlled by finger gestures using MediaPipe + OpenCV + pygame.
 
-**Stack:** OpenCV + (likely MediaPipe, given domain) + Python
+**Stack:** MediaPipe + OpenCV + pygame (for MIDI piano sounds)
 
 ## Relevance
 
-Low signal — 3 stars, 18 followers, sparse description ("Simple Midi Piano to play using finger gestures using opencv"). No distinguishing features apparent over better-documented projects like Air-Piano (#3) or midiGesture (#4).
+Low signal — 3 stars, 18 followers. Uses pygame for audio rather than MIDI output to a virtual port, which limits DAW integration. No distinguishing features over better-documented projects like Air-Piano (#3) or midiGesture (#4).

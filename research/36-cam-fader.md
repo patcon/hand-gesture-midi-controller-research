@@ -10,6 +10,8 @@
 
 A MIDI fader controlled by webcam hand movement. Single-purpose: hand position → MIDI fader value.
 
+**Stack:** MediaPipe 0.10.14 + OpenCV contrib + mido + python-rtmidi + sounddevice
+
 ## Relevance
 
-Low signal — 0 stars, 2 followers, sparse description. The fader concept (continuous vertical position → MIDI CC) is already well-covered by MadHand (#5) and the Gesture-Controlled-MIDI-Theremin (#6). Not worth prioritizing.
+Low signal — 0 stars, 2 followers. The fader concept (continuous vertical position → MIDI CC) is already well-covered by MadHand (#5) and the Gesture-Controlled-MIDI-Theremin (#6). The `sounddevice` dependency is unusual — suggests it may also do audio monitoring rather than pure MIDI output. Not worth prioritizing.
