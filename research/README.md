@@ -1,6 +1,6 @@
 # Research
 
-Projects sourced from the [tracking doc](https://docs.google.com/document/d/1vE60mXheYi223IWKxCPBhkVvElrPq1aWeoSuucTwZlU/edit?tab=t.0). Processed in doc order.
+Projects sourced from the [tracking doc](https://docs.google.com/document/d/1vE60mXheYi223IWKxCPBhkVvElrPq1aWeoSuucTwZlU/edit?tab=t.0) and user-submitted GitLab finds. GitHub projects processed in doc order; GitLab projects prefixed `gl-`.
 
 ## All Projects
 
@@ -30,11 +30,20 @@ Projects sourced from the [tracking doc](https://docs.google.com/document/d/1vE6
 | 22 | [Hands-Free](22-hands-free.md) | 7 | Swift | 25 | Medium — Apple Vision framework (native macOS/iOS alt to MediaPipe), see also Rhythm-Snap |
 | 23 | [MIDI2HANDS](23-midi2hands.md) | 3 | Python | 0 | Low — not gesture input; MIDI hand-assignment classifier |
 
+## GitLab Projects
+
+| # | Project | Stars | Language | Owner Followers | Priority |
+|---|---------|-------|----------|-----------------|----------|
+| gl-1 | [hand-midi-controller (ejfox)](gl-01-hand-midi-controller.md) | 3 (GH) | Python | 115 (GH) | **High** — most comprehensive open-source hand→MIDI; 23 CC outputs, virtual device, presets, TouchDesigner docs |
+| gl-2 | [to7m_midi_handler](gl-02-to7m-midi-handler.md) | 0 | Python | — | Low — MIDI routing middleware, not gesture input |
+| gl-3 | [salvagrid](gl-03-salvagrid.md) | 1 | WebGL/JS | — | Medium — physical object grid controller via webcam; distinct paradigm, live demo |
+
 ## Key Patterns Observed
 
 **MIDI output approaches:**
 - `pygame.midi` — simple, no virtual port needed, but limited DAW routing
 - `mido` + IAC Driver (macOS) / loopMIDI (Windows) — flexible, routes to any DAW
+- `python-rtmidi` — creates a named virtual MIDI device natively (ejfox's approach); no driver setup needed
 - `JZZ.js` (Web MIDI API) — browser-native, no driver needed in Chrome/Edge
 - AU/VST3 plugin — most DAW-integrated, highest friction to build (motion2midi)
 
@@ -58,6 +67,7 @@ Projects sourced from the [tracking doc](https://docs.google.com/document/d/1vE6
 - **Closed-source commercial**: motion2midi shows there's enough demand to build a product; uses YOLO not MediaPipe
 - **Two projects not relevant**: PianoHands.jl and MIDI2HANDS operate on MIDI files, not gesture input
 - **Rhythm-Snap**: Follow-up to Hands-Free by the same author — worth adding to tracking doc
+- **ejfox/hand-midi-controller**: Now the benchmark for open-source completeness; `python-rtmidi` virtual device is the cleanest MIDI output pattern found
 
 ## Recommended Starting Stack
 
